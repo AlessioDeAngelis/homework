@@ -71,8 +71,9 @@ preso in input un array di Point ritorna tutti
 quelli siti nel semipiano positivo definito dalla funzione y - x = 0 */
 
 var filterBisettrice = function(array){
+  var array = array || [];
   return array.
-    filter(function(item){
-      return item.x >= 0 && item.y>=0;
+    filter(function(p){
+      return p.y - p.x >=0;
     });
 }
