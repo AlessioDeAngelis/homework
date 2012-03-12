@@ -78,7 +78,7 @@ var filterBisettrice = function(array){
     });
 }
 
-//appartenenza a un semipiano definito da una rnretta
+//appartenenza a un semipiano definito da una retta
 Point.prototype.membership = function (funzioneRetta){
   var value = funzioneRetta(this.x, this.y);
 
@@ -107,8 +107,42 @@ var Line = function (a,b,c){
   this.c = c || 0;
 };
 
-Point.prototype.distance = function(line){
+Point.prototype.getDistanceFromLine = function(line){ 
   var numeratore =  Math.abs((line.a * this.x + line.b * this.y + line.c));
   var denominatore = Math.sqrt(Math.pow(line.a,2) + Math.pow(line.b,2));
   return numeratore/denominatore;
 };
+
+Point.prototype.getDistance = function(x){
+  if(x instanceof Point){
+    return this.getDistanceFromPoint(x);
+  }
+
+  if(x instanceof Line) {
+    return this.getDistanceFromLine(x);
+  }
+
+  throw new Error('x is not a Point nor a Line');
+};
+
+//try {
+//  p.getDistance();
+//} catch (e) {
+//
+//}
+
+//data in ingresso una linea dice se il triangolo è sopra alla linea
+Triangle.prototype.above = function(line){
+  return this.p1.membership(line) + this.p2.membership(line) + this.p3.membership(line) === 3; 
+}
+
+//data in ingresso una linea dice se il triangolo è sotto alla linea
+Triangle.prototype.below = function(line){
+  return this.p1.membership(line) + this.p2.membership(line) + this.p3.membership(line) === - 3; 
+}
+
+//data in ingresso una linea dice se il triangolo interseca la linea
+Triangle.prototype.below = function(line){
+  var result = this.p1.membership(line) + this.p2.membership(line) + this.p3.membership(line)
+  return  result < 3 && result > -3; 
+}
