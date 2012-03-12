@@ -77,3 +77,38 @@ var filterBisettrice = function(array){
       return p.y - p.x >=0;
     });
 }
+
+//appartenenza a un semipiano definito da una rnretta
+Point.prototype.membership = function (funzioneRetta){
+  var value = funzioneRetta(this.x, this.y);
+
+  if (value > 0){
+    return +1;
+  }
+
+  if (value < 0){
+    return -1;
+  }
+
+  return 0;
+}
+
+//Line rappresenta delle rette di equazione ax+by+c
+
+var Line = function (a,b,c){
+
+  // se l'utente si dimentica il new
+  if(!(this.instanceof Line)){
+    return new Line(a,b,c);
+
+
+  this.a = a || 0;
+  this.b = b || 0;
+  this.c = c || 0;
+};
+
+Point.prototype.distance = function(line){
+  var numeratore =  Math.abs((line.a * this.x + line.b * this.y + line.c));
+  var denominatore = Math.sqrt(Math.pow(line.a,2) + Math.pow(line.b,2));
+  return numeratore/denominatore;
+};
