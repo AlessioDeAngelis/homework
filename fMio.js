@@ -50,3 +50,13 @@ var consMio = function(a){
 		return b;
 	}
 }
+
+var distl = function (arguments){
+	var x = arguments[0];
+	var a = arguments[1];
+	var res;
+	for(var i = 0; i< a.length; i++){
+		res[i] = [x,a[i]];
+	}
+	return res;
+}
