@@ -51,9 +51,9 @@ var consMio = function(a){
 	}
 }
 
-var distl = function (arguments){
-	var x = arguments[0];
-	var a = arguments[1];
+var distl = function (arg){
+	var x = arg[0];
+	var a = arg[1];
 	var res;
 	for(var i = 0; i< a.length; i++){
 		res[i] = [x,a[i]];
